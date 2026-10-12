@@ -1,0 +1,666 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#17171f">
+
+  <title>Touka | Portfolio</title>
+
+  <style>
+    :root {
+      --background: #17171f;
+      --surface: #201f2c;
+      --surface-light: #282638;
+      --lavender: #b9a2ff;
+      --lavender-light: #d8ccff;
+      --text: #f3f0fa;
+      --muted: #aaa6bb;
+      --border: rgba(185, 162, 255, 0.18);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1100px, 90%);
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(23, 23, 31, 0.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.15rem;
+      font-weight: bold;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .logo span {
+      color: var(--lavender);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--lavender);
+    }
+
+    section {
+      padding: 85px 0;
+      scroll-margin-top: 75px;
+    }
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      align-items: center;
+      gap: 55px;
+    }
+
+    .eyebrow {
+      color: var(--lavender);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      font-size: 0.78rem;
+      font-weight: bold;
+      margin-bottom: 16px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      line-height: 1.12;
+      margin-bottom: 20px;
+    }
+
+    h1 span,
+    .accent {
+      color: var(--lavender);
+    }
+
+    .hero h2 {
+      font-size: 1.25rem;
+      color: var(--lavender-light);
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+
+    .intro {
+      color: var(--muted);
+      max-width: 550px;
+      margin-bottom: 28px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 22px;
+      border: 1px solid var(--lavender);
+      border-radius: 8px;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: var(--lavender);
+      color: #171321;
+    }
+
+    .btn-primary:hover {
+      background: var(--lavender-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      color: var(--lavender);
+    }
+
+    .btn-outline:hover {
+      background: rgba(185, 162, 255, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .portrait-frame {
+      width: 100%;
+      max-width: 340px;
+      aspect-ratio: 4 / 5;
+      margin: auto;
+      padding: 8px;
+      border: 1px solid var(--lavender);
+      border-radius: 24px;
+      background: var(--surface);
+      box-shadow: 0 0 40px rgba(185, 162, 255, 0.12);
+    }
+
+    .portrait-frame img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 17px;
+    }
+
+    .section-heading {
+      margin-bottom: 38px;
+    }
+
+    .section-heading h2 {
+      font-size: clamp(1.8rem, 4vw, 2.5rem);
+      margin-bottom: 10px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      max-width: 650px;
+    }
+
+    .about-box,
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 26px;
+    }
+
+    .about-box p {
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .about-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .card h3 {
+      color: var(--lavender-light);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+
+    .card .meta {
+      color: var(--lavender);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .card ul {
+      padding-left: 20px;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .skill {
+      background: var(--surface-light);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--lavender-light);
+      padding: 8px 13px;
+      font-size: 0.9rem;
+    }
+
+    .project-number {
+      color: var(--lavender);
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .project-link {
+      display: inline-block;
+      margin-top: 16px;
+      color: var(--lavender);
+      font-weight: bold;
+    }
+
+    .project-link:hover {
+      color: var(--lavender-light);
+    }
+
+    .contact-box {
+      background: linear-gradient(
+        135deg,
+        var(--surface),
+        #252137
+      );
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 35px;
+    }
+
+    .contact-box p {
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .contact-details {
+      display: grid;
+      gap: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .contact-details strong {
+      color: var(--lavender-light);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 25px 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 760px) {
+      nav {
+        padding: 16px 0;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+        gap: 12px 18px;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 65px;
+      }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        gap: 38px;
+      }
+
+      .portrait-frame {
+        max-width: 270px;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-box {
+        padding: 24px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <nav class="container">
+      <a class="logo" href="#home">LA<span>.</span> PORTFOLIO</a>
+
+      <div class="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- HOME -->
+    <section class="hero" id="home">
+      <div class="container hero-content">
+
+        <div>
+          <p class="eyebrow">Welcome to my portfolio</p>
+
+          <h1>
+            Hi, I'm <span>Touka.</span>
+          </h1>
+
+          <h2>Aspiring Computer Engineer</h2>
+
+          <p class="intro">
+            I'm a first-year Computer Engineering student passionate
+            about technology, problem-solving, and learning how
+            digital systems work. I'm currently developing my skills
+            through coursework and hands-on projects.
+          </p>
+
+          <div class="buttons">
+            <a class="btn btn-primary" href="#projects">
+              Explore My Work
+            </a>
+
+            <a class="btn btn-outline" href="#contact">
+              Contact Me
+            </a>
+          </div>
+        </div>
+
+        <div class="portrait-frame">
+          <img src="Touka.jpg" alt="Profile photo">
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">Get to know me</p>
+          <h2>About <span class="accent">Me</span></h2>
+          <p>I'm Touka, A wife, A girlfriend, Bestfriend and Enemy of Kaneki.</p>
+        </div>
+
+        <div class="about-box">
+          <p>
+            I am a Computer Engineering student interested in
+            technology, computer systems, and software development.
+            I enjoy exploring new ideas and discovering how technology
+            can help solve everyday problems.
+          </p>
+
+          <p>
+            As I continue my studies, I aim to improve my technical
+            abilities, gain practical experience, and work with others
+            to create useful and meaningful projects.
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">My background</p>
+          <h2>Education</h2>
+          <p>My academic journey and current field of study.</p>
+        </div>
+
+        <div class="grid">
+
+          <article class="card">
+            <p class="meta">Current Education</p>
+            <h3>Bachelor of Science in Computer Engineering</h3>
+            <p>First-Year College Student</p>
+            <p>Hell University</p>
+            <p>Present</p>
+          </article>
+
+          <article class="card">
+            <p class="meta">Previous Education</p>
+            <h3>Senior High School Graduate</h3>
+            <p>Senior High School Name</p>
+            <p>Graduation Year</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">What I'm learning</p>
+          <h2>My <span class="accent">Skills</span></h2>
+          <p>
+            Skills I have developed and continue to improve.
+          </p>
+        </div>
+
+        <div class="grid">
+
+          <article class="card">
+            <h3>Technical Skills</h3>
+            <p>Technology and computer-related skills.</p>
+
+            <div class="skill-list">
+              <span class="skill">Computer Literacy</span>
+              <span class="skill">HTML</span>
+              <span class="skill">CSS</span>
+              <span class="skill">Basic Programming</span>
+              <span class="skill">Troubleshooting</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <h3>Personal Skills</h3>
+            <p>Strengths I bring to teamwork and learning.</p>
+
+            <div class="skill-list">
+              <span class="skill">Communication</span>
+              <span class="skill">Teamwork</span>
+              <span class="skill">Problem-Solving</span>
+              <span class="skill">Adaptability</span>
+              <span class="skill">Fast Learner</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">Things I'm working on</p>
+          <h2>Featured <span class="accent">Projects</span></h2>
+          <p>
+            Selected academic concepts and projects from my
+            Computer Engineering journey.
+          </p>
+        </div>
+
+        <div class="grid">
+
+          <article class="card">
+            <p class="project-number">PROJECT 01</p>
+            <h3>Self-Service Printing Kiosk</h3>
+            <p>
+              A proposed touchscreen-based printing kiosk designed
+              to help users submit documents, estimate printing
+              costs, and pay digitally.
+            </p>
+            <div class="skill-list">
+              <span class="skill">Computer Engineering</span>
+              <span class="skill">UI Design</span>
+              <span class="skill">Digital Payment</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <p class="project-number">PROJECT 02</p>
+            <h3>IoT Drainage Monitoring</h3>
+            <p>
+              A proposed monitoring system that uses sensors to
+              observe drainage water levels and detect possible
+              blockages or overflow conditions.
+            </p>
+            <div class="skill-list">
+              <span class="skill">IoT</span>
+              <span class="skill">Sensors</span>
+              <span class="skill">Monitoring</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <p class="project-number">PROJECT 03</p>
+            <h3>Water Quality Monitoring</h3>
+            <p>
+              A proposed compact device that displays water
+              measurements from sensors and indicates when readings
+              may need further attention.
+            </p>
+            <div class="skill-list">
+              <span class="skill">Electronics</span>
+              <span class="skill">Sensors</span>
+              <span class="skill">Embedded Systems</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <p class="project-number">PROJECT 04</p>
+            <h3>More Projects Coming Soon</h3>
+            <p>
+              I'm continuing to learn, experiment, and develop
+              new ideas as I progress through my studies.
+            </p>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="container">
+
+        <div class="section-heading">
+          <p class="eyebrow">Let's connect</p>
+          <h2>Contact <span class="accent">Me</span></h2>
+          <p>
+            Feel free to reach out for academic collaboration,
+            project discussions, or professional opportunities.
+          </p>
+        </div>
+
+        <div class="contact-box">
+          <p>
+            I'm always open to learning from others and connecting
+            with people who share an interest in technology.
+          </p>
+
+          <div class="contact-details">
+            <p>
+              <strong>Email:</strong>
+              porkcutlett480@gmail.com
+            </p>
+
+            <p>
+              <strong>GitHub:</strong>
+              Add your GitHub profile link
+            </p>
+          </div>
+
+          <div class="buttons" style="margin-top: 24px;">
+            <a
+              class="btn btn-primary"
+              href="mailto:your.email@example.com"
+            >
+              Send Me an Email
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="container">
+      <p>
+        © 2026 Touka. Built with HTML and CSS.
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
